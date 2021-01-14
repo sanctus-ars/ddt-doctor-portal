@@ -1,0 +1,12 @@
+.app-pages {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-content: baseline;
+  align-items: stretch;
+  flex-direction: column;
+
+  &_content {
+    flex-basis: 100%;
+  }
+}

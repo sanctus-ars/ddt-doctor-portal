@@ -1,0 +1,78 @@
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="firstStepFormGroup">
+    <form [formGroup]="firstStepFormGroup">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <div class="registration-step_content">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Your email" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" placeholder="Your password" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role" required>
+            <mat-option *ngFor="let role of userRolesList" value="{{role}}">
+              {{ role }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="registration-step_footer">
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Fill out your address</ng-template>
+      <div  class="registration-step_content">
+        <ng-container *ngTemplateOutlet="firstStepFormGroup.value.role === 'Patient' ? isPatient : isDoctor"></ng-container>
+      </div>
+      <div class="registration-step_footer">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button color="warn" (click)="stepper.reset()">Reset</button>
+      <button mat-button color="primary" (click)="registryAction()">Registry</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<ng-template #isPatient>
+  <mat-form-field>
+    <mat-label>Birthday</mat-label>
+    <input matInput [matDatepicker]="pickerBirthday" [formControl]="secondStepBirthdayControl">
+    <mat-datepicker-toggle matSuffix [for]="pickerBirthday"></mat-datepicker-toggle>
+    <mat-datepicker #pickerBirthday></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Transplant Organ</mat-label>
+    <mat-select required [formControl]="secondStepTransplantOrganControl">
+      <mat-option *ngFor="let organ of transplantOrganList" value="{{organ}}">
+        {{ organ }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Transplant Date</mat-label>
+    <input matInput [matDatepicker]="pickerTransplantOrgan" [formControl]="secondStepTransplantOrganDateControl">
+    <mat-datepicker-toggle matSuffix [for]="pickerTransplantOrgan"></mat-datepicker-toggle>
+    <mat-datepicker #pickerTransplantOrgan></mat-datepicker>
+  </mat-form-field>
+</ng-template>
+<ng-template #isDoctor>
+  <mat-form-field>
+    <mat-label>Jobs</mat-label>
+    <input matInput  [formControl]="secondStepJobsControl" placeholder="Ex. transplantology">
+  </mat-form-field>
+</ng-template>

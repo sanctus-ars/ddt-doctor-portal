@@ -1,0 +1,26 @@
+<div class="app-login">
+  <h1 class="app-login_title">
+    Login
+    <span class="app-login_title-link">or <a routerLink="/pages/registration" title="SignUp">registration</a></span>
+  </h1>
+
+
+  <div class="app-login-content">
+    <form [formGroup]="loginFormGroup" class="app-login-content_form">
+      <mat-form-field class="app-login-content_form-item">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="login">
+      </mat-form-field>
+      <mat-form-field class="app-login-content_form-item">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password">
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="app-login-footer">
+    <button mat-raised-button mat-button (click)="loginAction()">
+      Login
+    </button>
+    or <a routerLink="/pages/forgot-password" title="Forgot Password">forgot your password?</a>
+  </div>
+</div>

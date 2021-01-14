@@ -1,0 +1,28 @@
+.app-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  &_title-link {
+    font-size: 14px;
+  }
+
+  &-content_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-item {
+      min-width: 300px;
+    }
+  }
+  &-footer {
+    a {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
